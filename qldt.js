@@ -18,12 +18,19 @@ var tkb_div = $('<div id="tkb_div"></div>')
 var table_data = createArray(rows, cols);
 for(var i = 0; i < 2; i++){
 	var table_id = "tkb_preview_table" + (i+1);
-	table[i] = $('<table class="tkb_preview_table" id='+table_id+'><thead> <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th> </thead><tbody>');
+	table[i] = $('<table style="table-layout:fixed;text-align:center;border-collapse: collapse;" class="tkb_preview_table" id='+table_id+'><thead> <th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th> </thead><tbody>');
+	var tkb_separator;
 	for(var r = 0; r < rows; r++)
 	{
-	    var tr = $('<tr>');
+		if(r == 2) tkb_separator = 'border-bottom:2px solid black;'
+		else tkb_separator = '';
+	    var tr = $('<tr style="border-bottom: 2px solid black;height:0px;"><td>k'+(r+1)+'</td>');
 	    for (var c = 0; c < cols; c++)
-	        $('<td style="border:solid green 1px">*</td>').appendTo(tr); //fill in your cells with something meaningful here
+	    	if((c+1)%7){
+		        $('<td style="border:solid green 1px;height:0px;">*</td>').appendTo(tr);
+		    } else {
+		        $('<td style="height:0px;"></td>').appendTo(tr);
+		    }
 	    tr.appendTo(table[i]);
 	}
 	$('</tbody></table>').appendTo(table[i]);
@@ -33,15 +40,10 @@ $("#pnlDSMonhocDK").prepend(tkb_div)
 tkb_div.css("background-color","#FFFFFF")
 $('body').append("<div id=bvk_tooltip style='display:none;background-color:yellow;width=20%;'></div>")
 $(document).on("mouseover", ".tkb_preview_table td", function(e){
-	console.log("mouseover, tooltip expected ->" + $(this).val());
 	$("#bvk_tooltip").offset({ left: e.pageX, top: e.pageY });
 	$("#bvk_tooltip").html($(this).val());
 	$("#bvk_tooltip").show("slow");
 })
-// $(document).on("mouseout", ".tkb_preview_table td", function(){
-// 	$("#bvk_tooltip").hide("slow");
-// 	$("#bvk_tooltip").html("");
-// })
 $(document).on("click", "#divTDK table", function(){
 	var course = $(this).find('td')
 	var weeks = []
