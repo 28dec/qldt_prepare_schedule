@@ -81,7 +81,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		var subject_teacher = course.eq(15).find('div.top-fline').eq(0).text();
 		if(m1.get(subject_code) != undefined){
 			var tmp_213 = m1.get(subject_code);
-			for(var i = 0; i < tmp_213.length; i++){
+			for(i = 0; i < tmp_213.length; i++){
 				if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html() == "+"){ // trung
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html("-");
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#00FF00"); //green
@@ -93,7 +93,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 				}
 			}
 			tmp_213 = m2.get(subject_code);
-			for(var i = 0; i < tmp_213.length; i++){
+			for(i = 0; i < tmp_213.length; i++){
 				if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html() == "+"){ // trung
 					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html("-");
 					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#00FF00"); //green
@@ -107,7 +107,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		}	
 		course.eq(16).find('div.top-fline').map(function(){
 			var tmp_151 = []
-			for(var i = 0; i < $(this).text().length; i++){
+			for(i = 0; i < $(this).text().length; i++){
 				if($(this).text()[i] != "-"){
 					if(i < 9){
 						tmp_151.push(parseInt($(this).text()[i]))
@@ -173,7 +173,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		} else {
 			var tmp1 = [];
 			var tmp2 = [];
-			for(var i = 0; i < weeks.length; i++){
+			for(i = 0; i < weeks.length; i++){
 				var crr_dow = day_of_week[i];
 				var crr_st = start_time[i];
 				var crr_dt = duration_time[i];
@@ -196,7 +196,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 			m1.set(subject_code, tmp1);
 			m2.set(subject_code, tmp2);
 			if(m1.get(subject_code) != undefined){
-				var tmp_219 = m1.get(subject_code); for(var i = 0; i < tmp_219.length; i++){
+				var tmp_219 = m1.get(subject_code); for(i = 0; i < tmp_219.length; i++){
 					if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
@@ -206,7 +206,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
 					}
 				}
-				tmp_219 = m2.get(subject_code); for(var i = 0; i < tmp_219.length; i++){
+				tmp_219 = m2.get(subject_code); for(i = 0; i < tmp_219.length; i++){
 					if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
