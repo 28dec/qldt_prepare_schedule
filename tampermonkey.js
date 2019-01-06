@@ -60,6 +60,8 @@ document.addEventListener ("DOMContentLoaded", function(){
 		$('</tbody></table>').appendTo(tables[i]);
 		tkb_div.append(tables[i])
 	}
+	tables[0].after($('<h4>from Bách Văn Khoa\'s keyboard with <3</h4>'))
+	tables[1].after($("<h4>Nếu có bất kì vấn đề gì phát sinh thì hãy xóa extension TamperMonkey đi, mọi chuyện sẽ trở về như lúc ta chưa từng quen.<br>Mọi ý kiến đóng góp đều được trân trọng, ném vào vùng kín cho mình nha :3 -> <a target='new' style='color:red;'href='https:fb.com/bachvkhoa'>CLICK HERE</a></h4>"))
 	$("#pnlDSMonhocDK").prepend(tkb_div)
 	tkb_div.css("background-color","#FFFFFF")
 	$('body').append("<div id=bvk_tooltip style='display:none;background-color:yellow;width=20%;'></div>")
