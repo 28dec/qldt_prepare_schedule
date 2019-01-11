@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT no-captcha
-// @version     19.1.61
+// @version     1.9.1.11a
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
