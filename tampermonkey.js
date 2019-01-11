@@ -17,9 +17,6 @@ function createArray(length) {
 		var args = Array.prototype.slice.call(arguments, 1);
 		while(i--) arr[length-1 - i] = createArray.apply(this, args);
 	}
-	if (1 < 2){
-
-	}
 	return arr;
 }
 document.addEventListener ("DOMContentLoaded", function(){
@@ -49,7 +46,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 			if(r < 2){
 				start_time_in_hr = r*2+7;
 			} else {
-				start_time_in_hr = r*2+6;
+				start_time_in_hr = r*2+8;
 			}
 		    var tr = $('<tr style="height:1px;'+tkb_separator+'"><td>'+ start_time_in_hr +'</td>');
 		    for (var c = 0; c < cols; c++)
