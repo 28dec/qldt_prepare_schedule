@@ -34,9 +34,10 @@ document.addEventListener ("DOMContentLoaded", function(){
 	var tables = [];
 	var m1 = new Map();
 	var m2 = new Map();
+	var tooltip_map = new Map();
 	var tkb_div = $('<div id="tkb_div"></div>')
-	var table_data = createArray(rows, cols);
-	for(var tmp1738 = 0; tmp1738 < rows; tmp1738++) for(var tmp1739 = 0; tmp1739 < cols; tmp1739++) table_data[tmp1738][tmp1739] = [];
+	var table_data = createArray(3, rows * cols);
+	for(var tmp1738 = 1; tmp1738 < 3; tmp1738++) for(var tmp1739 = 0; tmp1739 < rows * cols; tmp1739++) table_data[tmp1738][tmp1739] = new Map();
 	for(var i = 0; i < 2; i++){
 		var table_id = "tkb_preview_table" + (i+1);
 		tables[i] = $('<table style="table-layout:fixed;text-align:center;border-collapse: collapse;" class="tkb_preview_table" id='+table_id+'><thead> <th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>|</th> </thead><tbody>');
@@ -53,9 +54,9 @@ document.addEventListener ("DOMContentLoaded", function(){
 		    var tr = $('<tr style="height:1px;'+tkb_separator+'"><td>'+ start_time_in_hr +'</td>');
 		    for (var c = 0; c < cols; c++)
 		    	if((c+1)%7){
-			        $('<td class="bvk_table_cell" style="border:solid green 1px;height:1px;">*</td>').appendTo(tr);
+			        $('<td ud_id="'+ (r*cols+c) +'" class="bvk_table_cell" style="border:solid green 1px;height:1px;">*</td>').appendTo(tr);
 			    } else {
-			        $('<td class="bvk_table_cell" style="height:0px;"></td>').appendTo(tr);
+			        $('<td ud_id="'+ (r*cols+c) +'" class="bvk_table_cell" style="height:0px;"></td>').appendTo(tr);
 			    }
 		    tr.appendTo(tables[i]);
 		}
@@ -66,10 +67,27 @@ document.addEventListener ("DOMContentLoaded", function(){
 	tables[1].after($("<h4>Nếu có bất kì vấn đề gì phát sinh thì hãy xóa extension TamperMonkey đi, mọi chuyện sẽ trở về như lúc bạn chưa từng cài.<br>Mọi ý kiến đóng góp đều được trân trọng, ném vào vùng kín cho mình nha :3 -> <a target='new' style='color:red;'href='https:fb.com/bachvkhoa'>CLICK HERE</a></h4>"))
 	$("#pnlDSMonhocDK").prepend(tkb_div)
 	tkb_div.css("background-color","#FFFFFF")
-	$('body').append("<div id=bvk_tooltip style='display:none;background-color:yellow;width=20%;'></div>")
-	$(document).on("mouseover", ".tkb_preview_table td", function(e){
+	$('#ctl00_ContentPlaceHolder1_ctl00_UpdatePanel2').append("<div id=bvk_tooltip style='display:none;background-color:yellow;width=500px;'></div>")
+	$(document).on("mouseover", "#tkb_preview_table1 td", function(e){
 		$("#bvk_tooltip").offset({ left: e.pageX, top: e.pageY });
-		$("#bvk_tooltip").html($(this).val());
+		var index_1305 = $(this).attr('ud_id')
+		console.log(table_data[1][index_1305].values())
+		var text_1313 = '';
+		for([key, value] of table_data[1][index_1305]){
+			text_1313 += value + "<br>";
+		}
+		$("#bvk_tooltip").html(text_1313);
+		$("#bvk_tooltip").show("slow");
+	})
+	$(document).on("mouseover", "#tkb_preview_table2 td", function(e){
+		$("#bvk_tooltip").offset({ left: e.pageX, top: e.pageY });
+		var index_1305 = $(this).attr('ud_id')
+		console.log(table_data[2][index_1305].values())
+		var text_1313 = '';
+		for([key, value] of table_data[2][index_1305]){
+			text_1313 += value + "<br>";
+		}
+		$("#bvk_tooltip").html(text_1313);
 		$("#bvk_tooltip").show("slow");
 	})
 	$(document).on("click", "#divTDK table", function(){
@@ -92,9 +110,9 @@ document.addEventListener ("DOMContentLoaded", function(){
 				} else {
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html("*");
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#FFFFFF"); //white
-					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
-
+					// $("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
 				}
+				table_data[1][tmp_213[i]].delete(subject_code)
 			}
 			tmp_213 = m2.get(subject_code);
 			for(i = 0; i < tmp_213.length; i++){
@@ -104,9 +122,10 @@ document.addEventListener ("DOMContentLoaded", function(){
 				} else {
 					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html("*");
 					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#FFFFFF"); //white
-					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
+					// $("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
 
 				}
+				table_data[2][tmp_213[i]].delete(subject_code)
 			}
 		}	
 		course.eq(16).find('div.top-fline').map(function(){
@@ -204,30 +223,28 @@ document.addEventListener ("DOMContentLoaded", function(){
 			m2.set(subject_code, tmp2);
 			if(m1.get(subject_code) != undefined){
 				var tmp_219 = m1.get(subject_code);
-				console.log("table_1_data -> ")
-				console.log(tmp_219)
 				for(i = 0; i < tmp_219.length; i++){
 					if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
 					} else {
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#00FF00"); // green
-						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).prop('value', 'Info: [' + subject_code + '] ' + subject_name + '_' + subject_group + '_' + subject_tth + '_' + subject_teacher); // green
+						// $("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).prop('value', subject_code); // green
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
 					}
+					table_data[1][tmp_219[i]].set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 				}
 				tmp_219 = m2.get(subject_code);
-				console.log("table_2_data -> ")
-				console.log(tmp_219)
 				for(i = 0; i < tmp_219.length; i++){
 					if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
 					} else {
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#00FF00"); //green
-						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).prop('value', 'Info: [' + subject_code + '] ' + subject_name + '_' + subject_group + '_' + subject_tth + '_' + subject_teacher); //green
+						// $("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).prop('value', subject_code); //green
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
 					}
+					table_data[2][tmp_219[i]].set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 				}
 			}
 		}
