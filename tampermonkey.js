@@ -17,7 +17,9 @@ function createArray(length) {
 		var args = Array.prototype.slice.call(arguments, 1);
 		while(i--) arr[length-1 - i] = createArray.apply(this, args);
 	}
+	if (1 < 2){
 
+	}
 	return arr;
 }
 document.addEventListener ("DOMContentLoaded", function(){
@@ -61,7 +63,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		tkb_div.append(tables[i])
 	}
 	tables[0].after($('<h4>from Bách Văn Khoa\'s keyboard with <3</h4>'))
-	tables[1].after($("<h4>Nếu có bất kì vấn đề gì phát sinh thì hãy xóa extension TamperMonkey đi, mọi chuyện sẽ trở về như lúc ta chưa từng quen.<br>Mọi ý kiến đóng góp đều được trân trọng, ném vào vùng kín cho mình nha :3 -> <a target='new' style='color:red;'href='https:fb.com/bachvkhoa'>CLICK HERE</a></h4>"))
+	tables[1].after($("<h4>Nếu có bất kì vấn đề gì phát sinh thì hãy xóa extension TamperMonkey đi, mọi chuyện sẽ trở về như lúc bạn chưa từng cài.<br>Mọi ý kiến đóng góp đều được trân trọng, ném vào vùng kín cho mình nha :3 -> <a target='new' style='color:red;'href='https:fb.com/bachvkhoa'>CLICK HERE</a></h4>"))
 	$("#pnlDSMonhocDK").prepend(tkb_div)
 	tkb_div.css("background-color","#FFFFFF")
 	$('body').append("<div id=bvk_tooltip style='display:none;background-color:yellow;width=20%;'></div>")
@@ -113,8 +115,10 @@ document.addEventListener ("DOMContentLoaded", function(){
 				if($(this).text()[i] != "-"){
 					if(i < 9){
 						tmp_151.push(parseInt($(this).text()[i]))
-					} else {
+					} else if(i < 19) {
 						tmp_151.push(parseInt("1" + $(this).text()[i]))
+					} else{
+						tmp_151.push(parseInt("2" + $(this).text()[i]))
 					}
 				}
 			}
@@ -167,11 +171,11 @@ document.addEventListener ("DOMContentLoaded", function(){
 		course.eq(12).find('div.top-fline').map(function(){
 			start_time.push(parseInt(parseInt($(this).text())/2))
 		})
-		course.eq(13).find('div.top-fline').map(function(){
+		course.eq(13).find('div.top-fline').map(function(){i
 			duration_time.push(parseInt($(this).text()))
 		})
 		if(weeks.length != day_of_week.length){
-			alert("Lỗi môn, hãy báo inbox cho mình mã lỗi là #1245 để mình sửa nhé!\nm.me/bachvkhoa");
+			alert("Hệ thống đang bị lỗi môn này!");
 		} else {
 			var tmp1 = [];
 			var tmp2 = [];
@@ -183,14 +187,15 @@ document.addEventListener ("DOMContentLoaded", function(){
 				for(var j = 0; j < crr_aw.length; j++){
 					var crr_w = crr_aw[j]-1; //array start count from 0
 					if(crr_w < 10){
-						tmp1.push(subject_code, crr_dow+crr_w*7+crr_st*70);
+						tmp1.push(crr_dow+crr_w*7+crr_st*70);
 						if(crr_dt == 4){
-							tmp1.push(subject_code, crr_dow+crr_w*7+(crr_st+1)*70);
+							tmp1.push(crr_dow+crr_w*7+(crr_st+1)*70);
 						}
 					} else {
-						tmp2.push(subject_code, crr_dow+crr_w*7+crr_st*70);
+						crr_w -= 10;
+						tmp2.push(crr_dow+crr_w*7+crr_st*70);
 						if(crr_dt == 4){
-							tmp2.push(subject_code, crr_dow+crr_w*7+(crr_st+1)*70);
+							tmp2.push(crr_dow+crr_w*7+(crr_st+1)*70);
 						}
 					}
 				}
@@ -198,7 +203,10 @@ document.addEventListener ("DOMContentLoaded", function(){
 			m1.set(subject_code, tmp1);
 			m2.set(subject_code, tmp2);
 			if(m1.get(subject_code) != undefined){
-				var tmp_219 = m1.get(subject_code); for(i = 0; i < tmp_219.length; i++){
+				var tmp_219 = m1.get(subject_code);
+				console.log("table_1_data -> ")
+				console.log(tmp_219)
+				for(i = 0; i < tmp_219.length; i++){
 					if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
@@ -208,7 +216,10 @@ document.addEventListener ("DOMContentLoaded", function(){
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
 					}
 				}
-				tmp_219 = m2.get(subject_code); for(i = 0; i < tmp_219.length; i++){
+				tmp_219 = m2.get(subject_code);
+				console.log("table_2_data -> ")
+				console.log(tmp_219)
+				for(i = 0; i < tmp_219.length; i++){
 					if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
