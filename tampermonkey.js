@@ -34,7 +34,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 	var tables = [];
 	var m1 = new Map();
 	var m2 = new Map();
-	var tooltip_map = new Map();
+	var course_list = new Map();
 	var tkb_div = $('<div id="tkb_div"></div>')
 	var table_data = createArray(3, rows * cols);
 	for(var tmp1738 = 1; tmp1738 < 3; tmp1738++) for(var tmp1739 = 0; tmp1739 < rows * cols; tmp1739++) table_data[tmp1738][tmp1739] = new Map();
@@ -112,7 +112,6 @@ document.addEventListener ("DOMContentLoaded", function(){
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#FFFFFF"); //white
 					// $("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
 				}
-				table_data[1][tmp_213[i]].delete(subject_code)
 			}
 			tmp_213 = m2.get(subject_code);
 			for(i = 0; i < tmp_213.length; i++){
@@ -125,7 +124,11 @@ document.addEventListener ("DOMContentLoaded", function(){
 					// $("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
 
 				}
-				table_data[2][tmp_213[i]].delete(subject_code)
+			}
+			for(i = 1; i < 3; i++){
+				for(j = 0; j < rows * cols; j++){
+					table_data[i][j].delete(subject_code)
+				}
 			}
 		}	
 		course.eq(16).find('div.top-fline').map(function(){
@@ -233,6 +236,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
 					}
 					table_data[1][tmp_219[i]].set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
+					course_list.set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 				}
 				tmp_219 = m2.get(subject_code);
 				for(i = 0; i < tmp_219.length; i++){
@@ -245,14 +249,16 @@ document.addEventListener ("DOMContentLoaded", function(){
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
 					}
 					table_data[2][tmp_219[i]].set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
+					course_list.set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 				}
 			}
 		}
-		// console.log(subject_code)
-		// console.log(course.eq(3).text())
-		// console.log(day_of_week)
-		// console.log(start_time)
-		// console.log(duration_time)
-		// console.log(weeks)
+		$("#pnlDSMonhocDK").find('span.course_list_element').map(function(){
+			$(this).remove()
+		})
+		console.log("course_list_length = " + course_list.length)
+		for([key, value] of course_list){
+			$("#pnlDSMonhocDK").append("<span class='course_list_element'>"+value+"<br></span>")
+		}
 	});
 });
