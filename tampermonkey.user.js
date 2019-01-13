@@ -1,6 +1,6 @@
 // ==UserScript==
 // @author      bachvkhoa
-// @name        QLDT no-captcha
+// @name        QLDT supporter by bachvkhoa
 // @version     1.9.1.13a
 // @include     *
 // @run-at      document-start
