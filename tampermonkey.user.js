@@ -5,7 +5,7 @@
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
-// @updateURL https://openuserjs.org/meta/bachvkhoa/QLDT_no-captcha.meta.js
+// @updateURL https://raw.githubusercontent.com/28dec/qldt_prepare_schedule/master/update.meta.js
 // @license MIT
 // ==/UserScript==
 
