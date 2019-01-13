@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT supporter by bachvkhoa
-// @version     1.9.1.13d
+// @version     1.9.1.13e
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
