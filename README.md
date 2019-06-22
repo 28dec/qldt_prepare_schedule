@@ -11,6 +11,12 @@ Script này ra đời giải quyết hết các vấn đề các bạn gặp ph�
 - hỗ trợ đắc lực trong công tác chuẩn bị lịch học
 - auto nhập captcha
 ![alt text](https://github.com/28dec/qldt_prepare_schedule/blob/master/x.gif)
+# How to use
+- Bước 1: Cài Extension TamperMonkey lên trình duyệt của bạn (cả Google Chrome, Firefox, Opera, v.v... đều có hỗ trợ, như mình dùng Google Chrome) 
+- Bước 2: Sau khi cài được TamperMonkey, click link sau để tiến hành cài đặt -> https://github.com/28dec/qldt_prepare_schedule/raw/master/tampermonkey.user.js
+- Bước 3: Enjoy! Nếu có bất kì vấn đề gì phát sinh, chỉ cần uninstall TamperMonkey đi là mọi chuyện như chưa từng diễn ra
+# Chi tiết cài đặt
+https://github.com/28dec/qldt_prepare_schedule/blob/master/y.gif
 ![alt text](https://github.com/28dec/qldt_prepare_schedule/blob/master/2019-04-13%2010_29_25-Facebook.png)
 # from Bách Văn Khoa's keyboard with <3
 hi vọng script này sẽ giúp các bạn sắp xếp được một lịch học dự kiến vừa ý nhất, đồng thời hỗ trợ các bạn theo dõi thời khóa biểu trong quá trình đăng kí
