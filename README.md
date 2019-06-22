@@ -17,6 +17,5 @@ Script này ra đời giải quyết hết các vấn đề các bạn gặp ph�
 - Bước 3: Enjoy! Nếu có bất kì vấn đề gì phát sinh, chỉ cần uninstall TamperMonkey đi là mọi chuyện như chưa từng diễn ra
 # Chi tiết cài đặt
 https://github.com/28dec/qldt_prepare_schedule/blob/master/y.gif
-![alt text](https://github.com/28dec/qldt_prepare_schedule/blob/master/2019-04-13%2010_29_25-Facebook.png)
 # from Bách Văn Khoa's keyboard with <3
 hi vọng script này sẽ giúp các bạn sắp xếp được một lịch học dự kiến vừa ý nhất, đồng thời hỗ trợ các bạn theo dõi thời khóa biểu trong quá trình đăng kí
