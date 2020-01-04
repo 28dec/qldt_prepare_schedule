@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT supporter by bachvkhoa
-// @version     1.9.1.13f
+// @version     1.9.1.13g
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
@@ -181,7 +181,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 					day_of_week.push(5);
 					break;
 
-				case "CHỦ NHẬT":
+				case "CN":
 				case "SUN":
 					day_of_week.push(6);
 					break;
