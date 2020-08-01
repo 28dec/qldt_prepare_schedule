@@ -102,7 +102,8 @@ document.addEventListener ("DOMContentLoaded", function(){
 		var subject_group = course.eq(3).text();
 		var subject_tth = course.eq(4).text();
 		var subject_teacher = course.eq(15).find('div.top-fline').eq(0).text();
-
+		console.log(m1)
+		console.log(m2)
 		if(m1.get(subject_code) != undefined){
 			var tmp_213 = m1.get(subject_code);
 			for(i = 0; i < tmp_213.length; i++){
@@ -133,6 +134,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 				}
 			}
 		}
+		// Begin extract course schedule
 		course.eq(16).find('div.top-fline').map(function(){
 			var tmp_151 = []
 			for(i = 0; i < $(this).text().length; i++){
@@ -148,6 +150,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 			}
 			weeks.push(tmp_151)
 		})
+		// End extract course schedule
 		course.eq(11).find('div.top-fline').map(function(){
 			// day_of_week.push($(this).text())
 			var data = $(this).text().toUpperCase();
@@ -224,6 +227,12 @@ document.addEventListener ("DOMContentLoaded", function(){
 					}
 				}
 			}
+			tmp1 = tmp1.filter(function(item, index){
+				return tmp1.indexOf(item) === index;
+			})
+			tmp2 = tmp2.filter(function(item, index){
+				return tmp2.indexOf(item) === index;
+			})
 			m1.set(subject_code, tmp1);
 			m2.set(subject_code, tmp2);
 			if(m1.get(subject_code) != undefined){
