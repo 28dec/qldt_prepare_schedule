@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT supporter by bachvkhoa
-// @version     1.9.1.13g
+// @version     1.9.1.13h
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
@@ -34,6 +34,11 @@ document.addEventListener ("DOMContentLoaded", function(){
 	var course_list = new Map();
 	var tkb_div = $('<div id="tkb_div"></div>')
 	var table_data = createArray(3, rows * cols);
+	var SERVED = "v";
+	var AVAILABLE = " ";
+	var DUPLICATED = "x";
+
+
 	for(var tmp1738 = 1; tmp1738 < 3; tmp1738++) for(var tmp1739 = 0; tmp1739 < rows * cols; tmp1739++) table_data[tmp1738][tmp1739] = new Map();
 	for(var i = 0; i < 2; i++){
 		var table_id = "tkb_preview_table" + (i+1);
@@ -51,7 +56,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		    var tr = $('<tr style="height:1px;'+tkb_separator+'"><td>'+ start_time_in_hr +'</td>');
 		    for (var c = 0; c < cols; c++)
 		    	if((c+1)%7){
-			        $('<td ud_id="'+ (r*cols+c) +'" class="bvk_table_cell" style="border:solid green 1px;height:1px;">*</td>').appendTo(tr);
+			        $('<td ud_id="'+ (r*cols+c) +'" class="bvk_table_cell" style="border:solid green 1px;height:1px;">' + AVAILABLE + '</td>').appendTo(tr);
 			    } else {
 			        $('<td ud_id="'+ (r*cols+c) +'" class="bvk_table_cell" style="height:0px;"></td>').appendTo(tr);
 			    }
@@ -107,22 +112,22 @@ document.addEventListener ("DOMContentLoaded", function(){
 		if(m1.get(subject_code) != undefined){
 			var tmp_213 = m1.get(subject_code);
 			for(i = 0; i < tmp_213.length; i++){
-				if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html() == "+"){ // trung
-					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html("-");
+				if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html() == DUPLICATED){ // trung
+					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html(SERVED);
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#00FF00"); //green
 				} else {
-					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html("*");
+					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).html(AVAILABLE);
 					$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#FFFFFF"); //white
 					// $("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
 				}
 			}
 			tmp_213 = m2.get(subject_code);
 			for(i = 0; i < tmp_213.length; i++){
-				if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html() == "+"){ // trung
-					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html("-");
+				if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html() == DUPLICATED){ // trung
+					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html(SERVED);
 					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#00FF00"); //green
 				} else {
-					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html("*");
+					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).html(AVAILABLE);
 					$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).css("background-color", "#FFFFFF"); //white
 					// $("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_213[i]).prop('value', '');
 
@@ -137,6 +142,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		// Begin extract course schedule
 		course.eq(16).find('div.top-fline').map(function(){
 			var tmp_151 = []
+			console.log($(this).text())
 			for(i = 0; i < $(this).text().length; i++){
 				if($(this).text()[i] != "-"){
 					if(i < 9){
@@ -238,26 +244,26 @@ document.addEventListener ("DOMContentLoaded", function(){
 			if(m1.get(subject_code) != undefined){
 				var tmp_219 = m1.get(subject_code);
 				for(i = 0; i < tmp_219.length; i++){
-					if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
+					if($("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).text() == SERVED){ // da co mon tu truoc
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
-						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
+						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html(DUPLICATED);
 					} else {
 						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#00FF00"); // green
 						// $("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).prop('value', subject_code); // green
-						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
+						$("#tkb_preview_table1").find('td.bvk_table_cell').eq(tmp_219[i]).html(SERVED);
 					}
 					table_data[1][tmp_219[i]].set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 					course_list.set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 				}
 				tmp_219 = m2.get(subject_code);
 				for(i = 0; i < tmp_219.length; i++){
-					if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).text() == "-"){ // da co mon tu truoc
+					if($("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).text() == SERVED){ // da co mon tu truoc
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#FF0000"); //red
-						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("+");
+						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html(DUPLICATED);
 					} else {
 						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).css("background-color", "#00FF00"); //green
 						// $("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).prop('value', subject_code); //green
-						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html("-");
+						$("#tkb_preview_table2").find('td.bvk_table_cell').eq(tmp_219[i]).html(SERVED);
 					}
 					table_data[2][tmp_219[i]].set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
 					course_list.set(subject_code, subject_name + " - " + subject_group + " - " + subject_tth + " - " + subject_teacher)
