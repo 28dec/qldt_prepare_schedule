@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT supporter by bachvkhoa
-// @version     1.9.1.13h
+// @version     1.9.2
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
@@ -66,8 +66,8 @@ document.addEventListener ("DOMContentLoaded", function(){
 		tkb_div.append(tables[i])
 	}
 	tables[0].after($('<h4> </h4>'))
-	tables[1].after($('<h4>Hãy follow page <a target="new" style="color:blue" href="https://www.facebook.com/BatHuPTIT/">Tôi Yêu PTIT </a> để không bỏ lỡ những thông tin hữu ích!</h4>'))
-	tables[1].after($("<h4>Nếu bạn cảm thấy script ảnh hưởng đến quá trình đăng kí tín chỉ thì hãy xóa extension TamperMonkey đi, mọi chuyện sẽ trở về như lúc bạn chưa từng cài.<br>Nếu có bất kì ý kiến đóng góp, hãy nhắn tin cho <a target='new' style='color:blue;'href='https:fb.com/bachvkhoa'>Bách Văn Khoa</a> nha!</h4>"))
+	tables[1].after($('<h4>Sponsored by <a target="new" style="color:blue" href="https://www.facebook.com/BatHuPTIT/">Tôi Yêu PTIT </a>. Hãy follow page để không bỏ lỡ những thông tin mới nhất, chính xác nhất!</h4>'))
+	tables[1].after($("<h4>Script chỉ hiển thị thông tin dựa vào sự kiện click chuột, không hề can thiệp gì đến quá trình đăng kí tín chỉ.<br>Nếu có bất kì ý kiến đóng góp, bạn hãy nhắn tin cho <a target='new' style='color:blue;'href='https:fb.com/bachvkhoa'>Bách Văn Khoa</a> nha!</h4>"))
 	$("#pnlDSMonhocDK").prepend(tkb_div)
 	tkb_div.css("background-color","#FFFFFF")
 	$('#ctl00_ContentPlaceHolder1_ctl00_UpdatePanel2').append("<div id=bvk_tooltip style='display:none;background-color:yellow;width=500px;'></div>")
