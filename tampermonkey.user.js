@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT supporter by bachvkhoa
-// @version     1.9.2
+// @version     1.9.3
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
@@ -66,7 +66,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 		tkb_div.append(tables[i])
 	}
 	tables[0].after($('<h4> </h4>'))
-	tables[1].after($('<h4>Sponsored by <a target="new" style="color:blue" href="https://www.facebook.com/BatHuPTIT/">Tôi Yêu PTIT </a>. Hãy follow page để không bỏ lỡ những thông tin mới nhất, chính xác nhất!</h4>'))
+	tables[1].after($('<h4>Sponsored by <a target="new" style="color:blue" href="https://www.facebook.com/BatHuPTIT/">Tôi Yêu PTIT</a>. Hãy follow page để không bỏ lỡ những thông tin mới nhất, chính xác nhất!</h4>'))
 	tables[1].after($("<h4>Script chỉ hiển thị thông tin dựa vào sự kiện click chuột, không hề can thiệp gì đến quá trình đăng kí tín chỉ.<br>Nếu có bất kì ý kiến đóng góp, bạn hãy nhắn tin cho <a target='new' style='color:blue;'href='https:fb.com/bachvkhoa'>Bách Văn Khoa</a> nha!</h4>"))
 	$("#pnlDSMonhocDK").prepend(tkb_div)
 	tkb_div.css("background-color","#FFFFFF")
@@ -140,22 +140,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 			}
 		}
 		// Begin extract course schedule
-		course.eq(16).find('div.top-fline').map(function(){
-			var tmp_151 = []
-			console.log($(this).text())
-			for(i = 0; i < $(this).text().length; i++){
-				if($(this).text()[i] != "-"){
-					if(i < 9){
-						tmp_151.push(parseInt($(this).text()[i]))
-					} else if(i < 19) {
-						tmp_151.push(parseInt("1" + $(this).text()[i]))
-					} else{
-						tmp_151.push(parseInt("2" + $(this).text()[i]))
-					}
-				}
-			}
-			weeks.push(tmp_151)
-		})
+		weeks = extractCourseScheduleFormatDateRange(course);
 		// End extract course schedule
 		course.eq(11).find('div.top-fline').map(function(){
 			// day_of_week.push($(this).text())
@@ -278,3 +263,47 @@ document.addEventListener ("DOMContentLoaded", function(){
 		}
 	});
 });
+
+function extractCourseSchedule(course) {
+	var weeks = [];
+	course.eq(16).find('div.top-fline').map(function () {
+		var tmp_151 = [];
+		console.log($(this).text());
+		for (var i = 0; i < $(this).text().length; i++) {
+			if ($(this).text()[i] != "-") {
+				if (i < 9) {
+					tmp_151.push(parseInt($(this).text()[i]));
+				} else if (i < 19) {
+					tmp_151.push(parseInt("1" + $(this).text()[i]));
+				} else {
+					tmp_151.push(parseInt("2" + $(this).text()[i]));
+				}
+			}
+		}
+		weeks.push(tmp_151);
+	});
+	return weeks;
+}
+
+function extractCourseScheduleFormatDateRange(course) {
+	var weeks = [];
+
+	course.eq(16).find('div.top-fline').map(function () {
+		var scheduleWeeks = $(this).find('label').attr('id');
+		console.log(scheduleWeeks);
+		var tmp_151 = [];
+		for (var i = 0; i < scheduleWeeks.length; i++) {
+			if (scheduleWeeks[i] != "-") {
+				if (i < 9) {
+					tmp_151.push(parseInt(scheduleWeeks[i]));
+				} else if (i < 19) {
+					tmp_151.push(parseInt("1" + scheduleWeeks[i]));
+				} else {
+					tmp_151.push(parseInt("2" + scheduleWeeks[i]));
+				}
+			}
+		}
+		weeks.push(tmp_151);
+	});
+	return weeks;
+}
