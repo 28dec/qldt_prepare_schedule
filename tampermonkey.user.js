@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author      bachvkhoa
 // @name        QLDT supporter by bachvkhoa
-// @version     1.9.3
+// @version     1.9.4
 // @include     *
 // @run-at      document-start
 // @require http://code.jquery.com/jquery-2.1.0.min.js
@@ -140,7 +140,7 @@ document.addEventListener ("DOMContentLoaded", function(){
 			}
 		}
 		// Begin extract course schedule
-		weeks = extractCourseScheduleFormatDateRange(course);
+		weeks = extractCourseSchedule(course);
 		// End extract course schedule
 		course.eq(11).find('div.top-fline').map(function(){
 			// day_of_week.push($(this).text())
